@@ -9,10 +9,10 @@ export class Category {
   name: string;
 
   @Prop({ default: null })
-  parentCategoryId: string | null;
+  photoUrl: string | null;
 
-  @Prop()
-  photoUrl?: string;
+  @Prop({ required: true })
+  sortOrder: number;
 }
 
 export const CategorySchema = SchemaFactory.createForClass(Category);
