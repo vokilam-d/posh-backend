@@ -14,5 +14,5 @@ export class ReorderCategoryDto {
 export class ReorderCategoriesDto {
   @Expose()
   @Type(() => ReorderCategoryDto)
-  categories: ReorderCategoryDto[]
+  categories: ReorderCategoryDto[];
 }
