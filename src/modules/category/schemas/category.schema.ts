@@ -13,6 +13,8 @@ export class Category {
 
   @Prop({ required: true })
   sortOrder: number;
+
+  static collectionName = 'categories';
 }
 
 export const CategorySchema = SchemaFactory.createForClass(Category);

@@ -1,14 +1,17 @@
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Category } from '../schemas/category.schema';
+import { Category, CategorySchema } from '../schemas/category.schema';
 import { CreateOrUpdateCategoryDto } from '../dtos/create-or-update-category.dto';
 import { ReorderCategoriesDto } from '../dtos/reorder-categories.dto';
+import { FastifyRequest } from 'fastify';
+import { PhotoUploadService } from '../../photo-upload/services/photo-upload.service';
 
 @Injectable()
 export class CategoryService implements OnApplicationBootstrap {
   constructor(
-    @InjectModel(Category.name) private readonly categoryModel: Model<Category>
+    @InjectModel(Category.name) private readonly categoryModel: Model<Category>,
+    private readonly photoService: PhotoUploadService,
   ) {}
 
   onApplicationBootstrap(): any {
@@ -57,6 +60,10 @@ export class CategoryService implements OnApplicationBootstrap {
     await this.categoryModel.bulkSave(categories);
 
     return this.getAllCategories();
+  }
+
+  async uploadPhoto(request: FastifyRequest): Promise<string> {
+    return this.photoService.upload(request, Category.collectionName);
   }
 
   private async calcHighestSortOrder(): Promise<number> {

@@ -1,8 +1,8 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { Category } from '../schemas/category.schema';
 import { Expose } from 'class-transformer';
 
-export class CreateOrUpdateCategoryDto implements Pick<Category, "name" | 'photoUrl'> {
+export class CreateOrUpdateCategoryDto implements Omit<Category, 'id'> {
   @Expose()
   @IsString()
   @IsNotEmpty()
@@ -12,4 +12,8 @@ export class CreateOrUpdateCategoryDto implements Pick<Category, "name" | 'photo
   @IsOptional()
   @IsString()
   photoUrl: string;
+
+  @Expose()
+  @IsNumber()
+  sortOrder: number;
 }

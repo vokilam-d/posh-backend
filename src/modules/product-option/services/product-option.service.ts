@@ -29,7 +29,12 @@ export class ProductOptionService implements OnApplicationBootstrap {
   }
 
   async update(productOptionId: string, productOptionDto: CreateOrUpdateProductOptionDto): Promise<ProductOption> {
-    const productOption = await this.productOptionModel.findByIdAndUpdate(productOptionId, productOptionDto, { new: true }).exec();
+    const productOption = await this.productOptionModel.findByIdAndUpdate(
+      productOptionId,
+      productOptionDto,
+      { new: true },
+    ).exec();
+
     return productOption?.toJSON();
   }
 

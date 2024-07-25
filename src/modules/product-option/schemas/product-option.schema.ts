@@ -1,7 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-@Schema({ id: true })
+@Schema()
 export class ProductOptionValue {
+  @Prop({ required: true })
   id: string;
 
   @Prop({ required: true })

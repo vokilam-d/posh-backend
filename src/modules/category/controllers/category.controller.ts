@@ -9,12 +9,15 @@ import {
   Put,
   UsePipes,
   ValidationPipe,
+  Request,
 } from '@nestjs/common';
 import { CategoryService } from '../services/category.service';
 import { CreateOrUpdateCategoryDto } from '../dtos/create-or-update-category.dto';
 import { CategoryDto } from '../dtos/category.dto';
 import { toDto } from '../../../utils/to-dto.util';
 import { ReorderCategoriesDto } from '../dtos/reorder-categories.dto';
+import { FastifyRequest } from 'fastify';
+import { UploadedPhotoResponseDto } from '../../../dtos/uploaded-photo-response.dto';
 
 @Controller('categories')
 @UsePipes(new ValidationPipe({ transform: true }))
@@ -47,6 +50,13 @@ export class CategoryController {
   async reorderCategories(@Body() reorderCategoriesDto: ReorderCategoriesDto): Promise<CategoryDto[]> {
     const categories = await this.categoryService.reorderCategories(reorderCategoriesDto);
     return categories.map(category => toDto(CategoryDto, category));
+  }
+
+  @Post('photo')
+  async uploadPhoto(@Request() request: FastifyRequest): Promise<UploadedPhotoResponseDto> {
+    const photoUrl = await this.categoryService.uploadPhoto(request);
+
+    return { photoUrl };
   }
 
   @Put(':id')
