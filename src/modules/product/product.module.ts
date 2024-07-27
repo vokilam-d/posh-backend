@@ -14,5 +14,6 @@ import { PhotoUploadModule } from '../photo-upload/photo-upload.module';
   ],
   providers: [ProductService],
   controllers: [ProductController],
+  exports: [ProductService],
 })
 export class ProductModule {}

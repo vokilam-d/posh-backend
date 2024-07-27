@@ -11,6 +11,7 @@ import { ProductOption, ProductOptionSchema } from './schemas/product-option.sch
     ]),
   ],
   providers: [ProductOptionService],
-  controllers: [ProductOptionController]
+  controllers: [ProductOptionController],
+  exports: [ProductOptionService],
 })
 export class ProductOptionModule {}
