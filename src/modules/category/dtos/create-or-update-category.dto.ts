@@ -1,11 +1,13 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { Category } from '../schemas/category.schema';
 import { Expose } from 'class-transformer';
+import { TrimString } from '../../../utils/trim-string.decorator';
 
-export class CreateOrUpdateCategoryDto implements Omit<Category, 'id'> {
+export class CreateOrUpdateCategoryDto implements Omit<Category, '_id'> {
   @Expose()
   @IsString()
   @IsNotEmpty()
+  @TrimString()
   name: string;
 
   @Expose()
