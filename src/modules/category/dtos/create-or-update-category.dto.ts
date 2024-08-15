@@ -3,7 +3,7 @@ import { Category } from '../schemas/category.schema';
 import { Expose } from 'class-transformer';
 import { TrimString } from '../../../utils/trim-string.decorator';
 
-export class CreateOrUpdateCategoryDto implements Omit<Category, '_id'> {
+export class CreateOrUpdateCategoryDto implements Omit<Category, '_id' | 'createdAtIso' | 'updatedAtIso'> {
   @Expose()
   @IsString()
   @IsNotEmpty()

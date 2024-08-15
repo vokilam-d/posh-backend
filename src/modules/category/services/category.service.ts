@@ -40,16 +40,28 @@ export class CategoryService implements OnApplicationBootstrap {
 
   async create(categoryDto: CreateOrUpdateCategoryDto): Promise<Category> {
     const highestSortOrder = await this.calcHighestSortOrder();
-    const category = await this.categoryModel.create({
+    const categoryContents: Category = {
       ...categoryDto,
+      _id: null,
       sortOrder: highestSortOrder,
-    });
+      createdAtIso: new Date().toISOString(),
+      updatedAtIso: new Date().toISOString(),
+    };
+    const category = await this.categoryModel.create(categoryContents);
     return category.toJSON();
   }
 
   async update(categoryId: string, categoryDto: CreateOrUpdateCategoryDto): Promise<Category> {
-    const category = await this.categoryModel.findByIdAndUpdate(categoryId, categoryDto, { new: true }).exec();
-    return category?.toJSON();
+    const category = await this.categoryModel.findById(categoryId).exec();
+    if (!category) {
+      return null;
+    }
+
+    Object.assign(category, categoryDto);
+    category.updatedAtIso = new Date().toISOString();
+    await category.save();
+
+    return category.toJSON();
   }
 
   async deleteCategory(categoryId: string): Promise<Category> {

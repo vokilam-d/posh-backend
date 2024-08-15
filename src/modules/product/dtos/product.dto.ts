@@ -13,5 +13,8 @@ export class ProductDto extends CreateOrUpdateProductDto implements Product {
   id: string;
 
   @Expose()
-  salesCount: number;
+  createdAtIso: string;
+
+  @Expose()
+  updatedAtIso: string;
 }

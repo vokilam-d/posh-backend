@@ -4,7 +4,7 @@ import { Expose } from 'class-transformer';
 import { Unit } from '../enums/unit.enum';
 import { TrimString } from '../../../utils/trim-string.decorator';
 
-export class CreateOrUpdateIngredientDto implements Omit<Ingredient, '_id'> {
+export class CreateOrUpdateIngredientDto implements Omit<Ingredient, '_id' | 'createdAtIso' | 'updatedAtIso'> {
   @Expose()
   @IsString()
   @IsNotEmpty()

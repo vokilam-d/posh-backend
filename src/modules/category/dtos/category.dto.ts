@@ -11,4 +11,10 @@ export class CategoryDto extends CreateOrUpdateCategoryDto implements Category {
   @Expose()
   @TransformGetId()
   id: string;
+
+  @Expose()
+  createdAtIso: string;
+
+  @Expose()
+  updatedAtIso: string;
 }

@@ -35,20 +35,29 @@ export class IngredientService implements OnApplicationBootstrap {
   }
 
   async create(ingredientDto: CreateOrUpdateIngredientDto): Promise<Ingredient> {
-    const ingredient = await this.ingredientModel.create(ingredientDto);
+    const ingredientContents: Ingredient = {
+      ...ingredientDto,
+      _id: null,
+      createdAtIso: new Date().toISOString(),
+      updatedAtIso: new Date().toISOString(),
+    };
+    const ingredient = await this.ingredientModel.create(ingredientContents);
     return ingredient.toJSON();
   }
 
   async update(ingredientId: string, ingredientDto: CreateOrUpdateIngredientDto): Promise<Ingredient> {
-    const ingredient = await this.ingredientModel.findByIdAndUpdate(
-      ingredientId,
-      ingredientDto,
-      { new: true },
-    ).exec();
+    const ingredient = await this.ingredientModel.findById(ingredientId).exec();
+    if (!ingredient) {
+      return null;
+    }
+
+    Object.assign(ingredient, ingredientDto);
+    ingredient.updatedAtIso = new Date().toISOString();
+    await ingredient.save();
 
     this.eventsService.emit(EventName.IngredientUpdate, ingredient);
 
-    return ingredient?.toJSON();
+    return ingredient.toJSON();
   }
 
   async deleteIngredient(ingredientId: string): Promise<Ingredient> {

@@ -8,7 +8,7 @@ export class Order {
   @Prop()
   _id: number;
 
-  @Prop({ required: true })
+  @Prop({ required: true, default: new Date().toISOString() })
   createdAtIso: string;
 
   @Prop({ required: true, enum: PaymentType })

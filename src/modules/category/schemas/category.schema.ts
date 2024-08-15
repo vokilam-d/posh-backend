@@ -15,6 +15,12 @@ export class Category {
   @Prop({ required: true })
   sortOrder: number;
 
+  @Prop({ default: new Date().toISOString() })
+  createdAtIso: string;
+
+  @Prop({ default: new Date().toISOString() })
+  updatedAtIso: string;
+
   static collectionName = 'categories';
 }
 

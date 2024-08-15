@@ -54,16 +54,29 @@ export class ProductService implements OnApplicationBootstrap {
 
   async create(productDto: CreateOrUpdateProductDto): Promise<Product> {
     const highestSortOrder = await this.calcHighestSortOrder();
-    const product = await this.productModel.create({
+
+    const productContents: Product = {
       ...productDto,
+      _id: null,
       sortOrder: highestSortOrder,
-    });
+      createdAtIso: new Date().toISOString(),
+      updatedAtIso: new Date().toISOString(),
+    };
+    const product = await this.productModel.create(productContents);
     return product.toJSON();
   }
 
-  async update(productId: string, productDto: CreateOrUpdateProductDto): Promise<Product> {
-    const product = await this.productModel.findByIdAndUpdate(productId, productDto, { new: true }).exec();
-    return product?.toJSON();
+  async update(productId: string, productDto: CreateOrUpdateProductDto): Promise<Product | null> {
+    const product = await this.productModel.findById(productId).exec();
+    if (!product) {
+      return null;
+    }
+
+    Object.assign(product, productDto);
+    product.updatedAtIso = new Date().toISOString();
+    await product.save();
+
+    return product.toJSON();
   }
 
   async deleteProduct(productId: string): Promise<Product> {
@@ -115,9 +128,8 @@ export class ProductService implements OnApplicationBootstrap {
         for (const ingredient of product.ingredients) {
           await this.ingredientService.changeQty(ingredient.ingredientId, -ingredient.qty, session);
         }
-
-        product.salesCount += orderItem.qty;
-        await product.save({ session });
+        
+        // await product.save({ session });
 
       } catch (error) {
         this.logger.error(`onNewOrder: Could not update sales count of product (productId=${orderItem.productId}):`);

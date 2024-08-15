@@ -6,7 +6,7 @@ import { OptionVariantDto } from './option-variant.dto';
 import { OptionDto } from './option.dto';
 import { TrimString } from '../../../utils/trim-string.decorator';
 
-export class CreateOrUpdateProductDto implements Omit<Product, '_id' | 'salesCount'> {
+export class CreateOrUpdateProductDto implements Omit<Product, '_id' | 'createdAtIso' | 'updatedAtIso'> {
   @Expose()
   @IsString()
   @IsNotEmpty()

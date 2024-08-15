@@ -18,6 +18,12 @@ export class Ingredient {
   @Prop({ required: true })
   qty: number;
 
+  @Prop({ default: new Date().toISOString() })
+  createdAtIso: string;
+
+  @Prop({ default: new Date().toISOString() })
+  updatedAtIso: string;
+
   static collectionName = 'ingredients';
 }
 

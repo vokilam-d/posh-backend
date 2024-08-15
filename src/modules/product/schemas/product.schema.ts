@@ -32,8 +32,11 @@ export class Product {
   @Prop({ required: true })
   sortOrder: number;
 
-  @Prop({ default: 0 })
-  salesCount: number;
+  @Prop({ default: new Date().toISOString() })
+  createdAtIso: string;
+
+  @Prop({ default: new Date().toISOString() })
+  updatedAtIso: string;
 
 
   static collectionName: string = 'products';

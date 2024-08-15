@@ -11,4 +11,10 @@ export class IngredientDto extends CreateOrUpdateIngredientDto implements Ingred
   @Expose()
   @TransformGetId()
   id: string;
+
+  @Expose()
+  createdAtIso: string;
+
+  @Expose()
+  updatedAtIso: string;
 }
