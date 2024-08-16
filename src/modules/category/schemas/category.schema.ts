@@ -6,6 +6,9 @@ import mongoose from 'mongoose';
 export class Category {
   _id: mongoose.Types.ObjectId;
 
+  @Prop({ required: true, default: true })
+  isEnabled: boolean;
+
   @Prop({ required: true })
   name: string;
 

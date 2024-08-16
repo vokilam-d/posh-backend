@@ -6,6 +6,9 @@ import * as mongoose from 'mongoose';
 export class Ingredient {
   _id: mongoose.Types.ObjectId;
 
+  @Prop({ required: true, default: true })
+  isEnabled: boolean;
+
   @Prop({ required: true })
   name: string;
 

@@ -8,6 +8,9 @@ import mongoose from 'mongoose';
 export class Product {
   _id: mongoose.Types.ObjectId;
 
+  @Prop({ required: true, default: true })
+  isEnabled: boolean;
+
   @Prop({ required: true })
   name: string;
 

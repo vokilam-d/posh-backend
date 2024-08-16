@@ -1,4 +1,4 @@
-import { ArrayMinSize, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
+import { ArrayMinSize, IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Product } from '../schemas/product.schema';
 import { Expose, Type } from 'class-transformer';
 import { SelectedIngredientDto } from './selected-ingredient.dto';
@@ -7,6 +7,10 @@ import { OptionDto } from './option.dto';
 import { TrimString } from '../../../utils/trim-string.decorator';
 
 export class CreateOrUpdateProductDto implements Omit<Product, '_id' | 'createdAtIso' | 'updatedAtIso'> {
+  @Expose()
+  @IsBoolean()
+  isEnabled: boolean;
+
   @Expose()
   @IsString()
   @IsNotEmpty()
