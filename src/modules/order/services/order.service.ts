@@ -1,12 +1,11 @@
 import { BadRequestException, Injectable, OnApplicationBootstrap } from '@nestjs/common';
-import { InjectModel, Prop } from '@nestjs/mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Order } from '../schemas/order.schema';
 import { CreateOrUpdateOrderDto } from '../dtos/create-or-update-order.dto';
 import { ProductService } from '../../product/services/product.service';
 import { EventName, EventsService } from '../../global/services/events.service';
 import { IngredientService } from '../../ingredient/services/ingredient.service';
-import { OrderItemSelectedOptionDto } from '../dtos/order-item-selected-option.dto';
 import { OrderItemSelectedOption } from '../schemas/order-item-selected-option.schema';
 import { OrderItem } from '../schemas/order-item.schema';
 import { OrderItemIngredient } from '../schemas/order-item-ingredient.schema';
