@@ -12,7 +12,7 @@ export class OrderReportService implements OnApplicationBootstrap {
     @InjectModel(Order.name) private readonly orderModel: Model<Order>,
   ) {}
 
-  onApplicationBootstrap(): any {
+  onApplicationBootstrap(): void {
   }
 
   async getReport(queryDto: GetOrdersReportQueryDto): Promise<OrdersReportDto> {

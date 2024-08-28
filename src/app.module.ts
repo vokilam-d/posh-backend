@@ -7,6 +7,9 @@ import { ProductModule } from './modules/product/product.module';
 import { HealthModule } from './modules/health/health.module';
 import { OrderModule } from './modules/order/order.module';
 import { GlobalModule } from './modules/global/global.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
+import { GlobalExceptionFilter } from './filters/global-exception.filter';
 
 @Module({
   imports: [
@@ -17,6 +20,11 @@ import { GlobalModule } from './modules/global/global.module';
     HealthModule,
     OrderModule,
     GlobalModule,
+    AuthModule,
+    UserModule,
+  ],
+  providers: [
+    GlobalExceptionFilter,
   ],
 })
 export class AppModule {}

@@ -1,7 +1,7 @@
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Category, CategorySchema } from '../schemas/category.schema';
+import { Category } from '../schemas/category.schema';
 import { CreateOrUpdateCategoryDto } from '../dtos/create-or-update-category.dto';
 import { ReorderCategoriesDto } from '../dtos/reorder-categories.dto';
 import { FastifyRequest } from 'fastify';
@@ -15,7 +15,7 @@ export class CategoryService implements OnApplicationBootstrap {
     private readonly photoService: PhotoUploadService,
   ) {}
 
-  onApplicationBootstrap(): any {
+  onApplicationBootstrap(): void {
   }
 
   async getAllCategories(): Promise<Category[]> {

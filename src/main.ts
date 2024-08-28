@@ -10,6 +10,7 @@ import * as fastifyCompress from '@fastify/compress';
 import * as fastifyHelmet from '@fastify/helmet';
 import { join } from 'path';
 import { isProdEnv } from './utils/is-prod-env.util';
+import { GlobalExceptionFilter } from './filters/global-exception.filter';
 
 const logger = new Logger('main.ts');
 
@@ -29,6 +30,9 @@ async function bootstrap() {
     AppModule,
     fastifyAdapter,
   );
+  const globalExceptionFilter = app.get(GlobalExceptionFilter);
+
+  app.useGlobalFilters(globalExceptionFilter);
   app.setGlobalPrefix(`/api/v1`);
   app.enableCors();
 

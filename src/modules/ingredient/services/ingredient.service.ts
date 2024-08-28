@@ -13,7 +13,7 @@ export class IngredientService implements OnApplicationBootstrap {
     private readonly eventsService: EventsService,
   ) {}
 
-  onApplicationBootstrap(): any {
+  onApplicationBootstrap(): void {
   }
 
   async getAllIngredients(): Promise<Ingredient[]> {

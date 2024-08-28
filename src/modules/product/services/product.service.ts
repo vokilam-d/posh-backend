@@ -27,7 +27,7 @@ export class ProductService implements OnApplicationBootstrap {
     private readonly ingredientService: IngredientService,
   ) {}
 
-  onApplicationBootstrap(): any {
+  onApplicationBootstrap(): void {
     this.eventsService.on(EventName.NewOrder, order => this.onNewOrder(order));
     this.eventsService.on(EventName.IngredientUpdate, ingredient => this.onIngredientUpdate(ingredient));
   }

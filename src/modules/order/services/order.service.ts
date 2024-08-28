@@ -23,7 +23,7 @@ export class OrderService implements OnApplicationBootstrap {
     private readonly eventsService: EventsService,
   ) {}
 
-  onApplicationBootstrap(): any {
+  onApplicationBootstrap(): void {
   }
 
   async getAllOrders(): Promise<Order[]> {

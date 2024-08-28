@@ -6,11 +6,13 @@ import { Ingredient } from '../../ingredient/schemas/ingredient.schema';
 export enum EventName {
   NewOrder = 'NEW_ORDER',
   IngredientUpdate = 'INGREDIENT_UPDATE',
+  AppError = 'APP_ERROR',
 }
 
 type EventMap = {
   [EventName.NewOrder]: [Order];
   [EventName.IngredientUpdate]: [Ingredient];
+  [EventName.AppError]: [unknown, string];
 }
 
 @Injectable()
